@@ -20,14 +20,14 @@ ___
 
 copy this command and paste it on your terminal. 
 ```bash
-curl https://raw.githubusercontent.com/Arab-developers/PSHMode/main/install.sh > PSHMode.install && source HackerModeInstall
+curl https://raw.githubusercontent.com/Arab-developers/PSHMode/main/install.sh > PSHMode.install && source PSHMode.install
 ```
 ___
 **kali linux**:
 
 copy this command and paste it on your terminal.
 ```bash
-curl https://raw.githubusercontent.com/Arab-developers/PSHMode/main/install.sh > PSHMode.install && source HackerModeInstall
+curl https://raw.githubusercontent.com/Arab-developers/PSHMode/main/install.sh > PSHMode.install && source PSHMode.install
 ```
 <br>
 <div id="docs"></div>
