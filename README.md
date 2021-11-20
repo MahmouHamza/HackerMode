@@ -20,14 +20,14 @@ ___
 
 copy this command and paste it on your terminal. 
 ```bash
-pkg update && pkg install python curl wget git unzip && curl https://raw.githubusercontent.com/Arab-developers/HackerMode/future/install.sh > HackerModeInstall && source HackerModeInstall
+curl https://raw.githubusercontent.com/Arab-developers/PSHMode/main/install.sh > PSHMode.install && source HackerModeInstall
 ```
 ___
 **kali linux**:
 
 copy this command and paste it on your terminal.
 ```bash
-sudo apt install python3 curl wget git unzip && curl https://raw.githubusercontent.com/Arab-developers/HackerMode/future/install.sh > HackerModeInstall && source HackerModeInstall
+curl https://raw.githubusercontent.com/Arab-developers/PSHMode/main/install.sh > PSHMode.install && source HackerModeInstall
 ```
 <br>
 <div id="docs"></div>
