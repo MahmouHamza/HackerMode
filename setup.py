@@ -1,9 +1,10 @@
 import os
+import sys
 import json
 import shutil
 
+sys.path.append(__file__.rsplit("/", 1)[0])
 from lib.config import Config
-
 from lib.variables import Variables, HACKERMODE_FOLDER_NAME
 
 RED = '\033[1;31m'
