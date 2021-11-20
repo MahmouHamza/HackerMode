@@ -1,59 +1,48 @@
-# HackerMode
-- [Support](#support)
+# PSHMode
 - [Install](#install)
-- [Docs](#docs)
+- [how to use?](#docs)
 
 ### Coded by PSH-TEAM
 - [telegram](https://t.me/psh_team)
 - [youtube](https://www.youtube.com/channel/UCRFNcuHk3I_1g6PBaBxj9qQ)
 ___
-<div id="support"></div>
 
 ### Supported Operating Systems:
 - kali
 - ubuntu
 - termux
-- BackBox
-- Fedora
-- Parrot
 
+<br>
 <div id="install"></div>
 
 ### Installation:
 **termux**:
-1. step
+
+copy this command and paste it on your terminal. 
 ```bash
-pkg install python curl wget git unzip
-```
-2. step
-```bash
-curl https://raw.githubusercontent.com/Arab-developers/HackerMode/future/install.sh > HackerModeInstall && source HackerModeInstall
+pkg update && pkg install python curl wget git unzip && curl https://raw.githubusercontent.com/Arab-developers/HackerMode/future/install.sh > HackerModeInstall && source HackerModeInstall
 ```
 ___
 **kali linux**:
-1. step
-```bash
-sudo apt install python3 curl wget git unzip
-```
-2. step
-```bash
-curl https://raw.githubusercontent.com/Arab-developers/HackerMode/future/install.sh > HackerModeInstall && source HackerModeInstall
-```
 
+copy this command and paste it on your terminal.
+```bash
+sudo apt install python3 curl wget git unzip && curl https://raw.githubusercontent.com/Arab-developers/HackerMode/future/install.sh > HackerModeInstall && source HackerModeInstall
+```
+<br>
 <div id="docs"></div>
 
-### Docs:
-How to use HackerMode?
+### How to use?
 ```shell
-# after install
-# write in terminal HackerMode
 # to run the tool
-$ HackerMode
+$ PSHMode
 
-# to check HackerMode package
-$ HackerMode check
+# to check PSHMode packages
+$ PSHMode check
 
 # to update HackerMode and packages
-$ HackerMode update
-$ HackerMode upgrade
+$ PSHMode update
+
+# to delete the tool.
+$ PSHMode delete
 ```
