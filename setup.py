@@ -100,9 +100,9 @@ class HackerModeInstaller:
         for module in need_to_install["modules"]:
             os.system(f"pip3 install {module}")
 
-        # move HackerMode to install path
+        # move PSHMode to install path
         if Config.get('actions', 'DEBUG', False):
-            print("# can't move the HackerMode folder ")
+            print("# can't move the PSHMode folder ")
             print("# to install path in debug mode!")
             return None
         if os.path.isdir(HACKERMODE_FOLDER_NAME):
@@ -111,7 +111,7 @@ class HackerModeInstaller:
                 self.install_tools_packages()
                 Config.set('actions', 'IS_INSTALLED', True)
                 self.check()
-                print(f'# {GREEN}HackerMode installed successfully...{NORMAL}')
+                print(f'# {GREEN}PSHMode installed successfully...{NORMAL}')
             except shutil.Error as e:
                 self.delete(show_message=False)
                 print(e)
@@ -119,22 +119,22 @@ class HackerModeInstaller:
         else:
             self.delete(show_message=False)
             print(f'{RED}# Error: the tool path not found!')
-            print(f'# try to run tool using\n# {GREEN}"python3 HackerMode install"{NORMAL}')
+            print(f'# try to run tool using\n# {GREEN}"python3 PSHMode install"{NORMAL}')
             print('# installed failed!')
 
     def update(self):
         if not Config.get('actions', 'DEBUG', cast=bool, default=False):
-            hackermode_command_line_path = os.environ.get("_").split("bin/")[0] + "bin/HackerMode"
+            hackermode_command_line_path = os.environ.get("_").split("bin/")[0] + "bin/PSHMode"
             if os.path.exists(hackermode_command_line_path):
                 os.remove(hackermode_command_line_path)
             os.system(
                 f'curl https://raw.githubusercontent.com/Arab-developers/HackerMode/future/install.sh > HackerModeInstall && bash HackerModeInstall')
-            print(f'# {GREEN}HackerMode updated successfully...{NORMAL}')
+            print(f'# {GREEN}PSHMode updated successfully...{NORMAL}')
         else:
             print("# can't update in the DEUBG mode!")
 
     def add_shortcut(self):
-        # add HackerMode shortcut...
+        # add PSHMode shortcut...
         try:
             with open(Variables.BASHRIC_FILE_PATH, "r") as f:
                 data = f.read()
@@ -142,7 +142,7 @@ class HackerModeInstaller:
                 with open(Variables.BASHRIC_FILE_PATH, "w") as f:
                     f.write(data + Variables.HACKERMODE_SHORTCUT)
         except PermissionError:
-            print(NORMAL + "# add HackerMode shortcut:")
+            print(NORMAL + "# add PSHMode shortcut:")
             print(f"# '{YELLOW}{Variables.HACKERMODE_SHORTCUT}{NORMAL}'")
             print("# to this path:")
             print("# " + Variables.HACKERMODE_BIN_PATH)
@@ -153,8 +153,8 @@ class HackerModeInstaller:
         else:
             status = "y"
         if status in ("y", "yes", "ok", "yep"):
-            bin_path = os.path.join(os.environ["SHELL"].split("/bin/")[0], "/bin/HackerMode")
-            tool_path = os.path.join(os.environ["HOME"], ".HackerMode")
+            bin_path = os.path.join(os.environ["SHELL"].split("/bin/")[0], "/bin/PSHMode")
+            tool_path = os.path.join(os.environ["HOME"], ".PSHMode")
             if os.path.exists(bin_path):
                 os.remove(bin_path)
             if os.path.exists(tool_path):
@@ -167,19 +167,19 @@ class HackerModeInstaller:
                             f.write(data.replace(Variables.HACKERMODE_SHORTCUT, ""))
                 except PermissionError:
                     if show_message:
-                        print("# cannot remove HackerMode shortcut!")
+                        print("# cannot remove PSHMode shortcut!")
             if show_message:
                 print("# The deletion was successful...")
 
     def install_tools_packages(self):
         # compile shell file
         old_path = os.getcwd()
-        os.chdir(os.path.join(os.environ.get("HOME"), ".HackerMode/HackerMode/lib"))
+        os.chdir(os.path.join(os.environ.get("HOME"), ".PSHMode/PSHMode/lib"))
         os.system("bash setup.sh")
         os.chdir(old_path)
 
         # install tools packages
-        tools_path = os.path.join(os.environ.get("HOME"), ".HackerMode/HackerMode/tools")
+        tools_path = os.path.join(os.environ.get("HOME"), ".PSHMode/PSHMode/tools")
         for root, dirs, files in os.walk(tools_path):
             for dir in dirs:
                 if os.path.exists(os.path.join(root, dir, "setup.sh")):

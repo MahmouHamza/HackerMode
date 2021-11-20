@@ -40,7 +40,7 @@ $ PSHMode
 # to check PSHMode packages
 $ PSHMode check
 
-# to update HackerMode and packages
+# to update PSHMode and packages
 $ PSHMode update
 
 # to delete the tool.
