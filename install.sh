@@ -20,11 +20,12 @@ function download_PSHMode() {
   mv -f PSHMode-main .PSHMode
 }
 
-clear
-echo -e "Start installing for ( \033[1;32m$PLATFORM\033[0m )"
+if [[ $PLATFORM != "unknown" ]]; then
+  echo -e "\n\nStart installing for ( \033[1;32m$PLATFORM\033[0m )"
+fi
 
 # Linux installation...
-if [[ "$PLATFORME" -eq "linux" ]]; then
+if [[ $PLATFORM == "linux" ]]; then
   # Install packages...
   sudo apt update -y
   sudo apt install $PSHMODE_PACKAGES -y
@@ -37,8 +38,7 @@ if [[ "$PLATFORME" -eq "linux" ]]; then
   python3 -B .PSHMode install
 
 # Termux installation...
-elif [[ "$PLATFORME" -eq "termux" ]]; then
-  read name
+elif [[ $PLATFORM == "termux" ]]; then
   # Install packages...
   pkg update -y
   pkg install $PSHMODE_PACKAGES -y
