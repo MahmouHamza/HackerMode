@@ -154,8 +154,7 @@ class HackerModeInstaller:
         os.chdir(old_path)
 
         # install tools packages
-        tools_path = os.path.join(os.environ.get("HOME"), ".PSHMode/PSHMode/tools")
-        for root, dirs, files in os.walk(tools_path):
+        for root, dirs, files in os.walk(Variables.TOOLS_PATH):
             for dir in dirs:
                 if os.path.exists(os.path.join(root, dir, "setup.sh")):
                     print(f"installing {dir} packages:")

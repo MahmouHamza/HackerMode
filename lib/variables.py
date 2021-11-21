@@ -40,9 +40,9 @@ class Variables:
         return '/'.join(os.path.abspath(__file__).split('/')[:-2])
 
     @property
-    def HACKERMODE_BIN_PATH(self) -> str:
-        """To get PSHMode [PSHMode/bin/] directory"""
-        return os.path.join(self.REAL_TOOL_PATH, "bin")
+    def TOOLS_PATH(self) -> str:
+        """To get the PSHMode [PSHMode/tools/] path"""
+        return os.path.join(self.REAL_TOOL_PATH, "tools")
 
     @property
     def TOOL_INSTALL_PATH(self) -> str:
