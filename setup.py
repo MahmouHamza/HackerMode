@@ -149,7 +149,7 @@ class HackerModeInstaller:
     def install_tools_packages(self):
         # compile shell file
         old_path = os.getcwd()
-        os.chdir(os.path.join(os.environ.get("HOME"), ".PSHMode/PSHMode/lib"))
+        os.chdir(os.path.join(Variables.TOOL_INSTALL_PATH, "lib"))
         os.system("bash setup.sh")
         os.chdir(old_path)
 
