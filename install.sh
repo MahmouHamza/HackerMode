@@ -20,6 +20,8 @@ function download_PSHMode() {
   mv -f PSHMode-main .PSHMode
 }
 
+echo -e "Start Installing for ( \033[1;32m$PLATFORM\033[1;32m )"
+
 # Linux installation...
 if [[ "$PLATFORME" -eq "linux" ]]; then
   # Install packages...
@@ -33,6 +35,7 @@ if [[ "$PLATFORME" -eq "linux" ]]; then
   sudo python3 -B .PSHMode add_shortcut
   python3 -B .PSHMode install
 
+# Termux installation...
 elif [[ "$PLATFORME" -eq "termux" ]]; then
   # Install packages...
   pkg update -y
@@ -43,7 +46,7 @@ elif [[ "$PLATFORME" -eq "termux" ]]; then
 
   # Download the tool.
   download_PSHMode
-  sudo python3 -B .PSHMode add_shortcut
+  python3 -B .PSHMode add_shortcut
   mkdir /sdcard/PSHMode <&/dev/null
   python3 -B .PSHMode install
 
