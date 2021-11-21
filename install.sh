@@ -4,7 +4,7 @@ rm -f HackerModeInstall &>/dev/null
 rm -rif PSHMode ~/.PSHMode ~/../usr/bin/PSHMode &>/dev/null
 rm -f PSHMode.install &>/dev/null
 
-# get the platform.
+# Get the platform.
 PLATFORM=$(python3 -c "import sys,os;print('win' if sys.platform in ('win32', 'cygwin') else 'macosx' if sys.platform == 'darwin' else 'termux' if os.environ.get('PREFIX') != None else 'linux' if sys.platform.startswith('linux') or sys.platform.startswith('freebsd') else 'unknown')")
 
 # To install before setup the tool.
@@ -20,9 +20,9 @@ function download_PSHMode() {
   mv -f PSHMode-main .PSHMode
 }
 
-# linux installation...
+# Linux installation...
 if [[ "$PLATFORME" -eq "linux" ]]; then
-  # install packages...
+  # Install packages...
   sudo apt update -y
   sudo apt install $PSHMODE_PACKAGES -y
   sudo apt install python3 -y
@@ -34,14 +34,14 @@ if [[ "$PLATFORME" -eq "linux" ]]; then
   python3 -B .PSHMode install
 
 elif [[ "$PLATFORME" -eq "termux" ]]; then
-  # install packages...
+  # Install packages...
   pkg update -y
   pkg install $PSHMODE_PACKAGES -y
 
-  # get sdcard permission.
+  # Get sdcard permission.
   ls /sdcard &>/dev/null || termux-setup-storage
 
-  # download the tool.
+  # Download the tool.
   download_PSHMode
   sudo python3 -B .PSHMode add_shortcut
   mkdir /sdcard/PSHMode <&/dev/null
@@ -53,7 +53,7 @@ fi
 unset PLATFORM PSHMODE_PACKAGES
 unset -f download_PSHMode
 
-# add PSHMode command line.
+# Add PSHMode command line.
 function PSHMode() {
   if [ $1 ]; then
     if [ $1 == "check" ]; then
