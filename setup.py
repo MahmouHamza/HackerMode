@@ -74,10 +74,10 @@ class HackerModeInstaller:
 
         if show_output and install_message:
             if os.path.isdir(Variables.TOOL_INSTALL_PATH):
-                if len(package) == 0 and len(modules) == 0:
-                    print(f"# {GREEN}PSHMode installed successfully.{NORMAL}")
-                else:
+                if all([modules, packages]):
                     print(f"# {YELLOW}PSHMode installed successfully but there is some issues.{NORMAL}")
+                else:
+                    print(f"# {GREEN}PSHMode installed successfully.{NORMAL}")
             else:
                 self.delete(show_message=False)
                 print(f"# {RED}Installed failed!.{NORMAL}")
@@ -94,6 +94,9 @@ class HackerModeInstaller:
         # install modules
         for module in need_to_install["modules"]:
             os.system(f"pip3 install {module}")
+
+        # setup PSHMode tools
+        self.install_tools_packages()
 
         # to check
         self.check(install_message=True)
