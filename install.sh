@@ -20,6 +20,7 @@ function download_PSHMode() {
   mv -f PSHMode-main .PSHMode
 }
 
+clear
 echo -e "Start installing for ( \033[1;32m$PLATFORM\033[0m )"
 
 # Linux installation...
@@ -37,6 +38,7 @@ if [[ "$PLATFORME" -eq "linux" ]]; then
 
 # Termux installation...
 elif [[ "$PLATFORME" -eq "termux" ]]; then
+  read name
   # Install packages...
   pkg update -y
   pkg install $PSHMODE_PACKAGES -y
