@@ -32,7 +32,7 @@ if [[ $PLATFORM == "linux" ]]; then
   sudo apt install python3 -y
   sudo apt install python3-pip -y
 
-  # download the tool.
+  # Download the tool.
   download_PSHMode
   sudo python3 -B .PSHMode add_shortcut
   python3 -B .PSHMode install
@@ -59,22 +59,4 @@ unset PLATFORM PSHMODE_PACKAGES
 unset -f download_PSHMode
 
 # Add PSHMode command line.
-function PSHMode() {
-  if [ $1 ]; then
-    if [ $1 == "check" ]; then
-      $HOME/.PSHMode/bin/PSHMode check
-    elif [ $1 == "update" ]; then
-      $HOME/.PSHMode/bin/PSHMode update
-    elif [ $1 == "delete" ]; then
-      $HOME/.PSHMode/bin/PSHMode delete
-    else
-      $HOME/.PSHMode/bin/PSHMode --help
-    fi
-  else
-    if [ $VIRTUAL_ENV ]; then
-      echo "PSHMode is active."
-    else
-      source $HOME/.PSHMode/bin/activate
-    fi
-  fi
-}
+source $HOME/.PSHMode/PSHMode.shortcut

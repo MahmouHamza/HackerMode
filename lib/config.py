@@ -10,7 +10,7 @@ except ImportError:
 
 
 class config(object):
-    default_file = os.path.join(Variables.HACKERMODE_CONFIG_PATH, 'PSHMode-config.json')
+    default_file = os.path.join(Variables.CONFIG_PATH, 'PSHMode-config.json')
 
     def __init__(self, file=None):
         if file:

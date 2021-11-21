@@ -5,7 +5,7 @@ import shutil
 
 sys.path.append(__file__.rsplit("/", 1)[0])
 from lib.config import Config
-from lib.variables import Variables, HACKERMODE_FOLDER_NAME
+from lib.variables import Variables, TOOL_NAME
 
 RED = '\033[1;31m'
 GREEN = '\033[1;32m'
@@ -14,7 +14,7 @@ NORMAL = '\033[0m'
 UNDERLINE = '\033[4m'
 BOLD = '\033[1m'
 
-with open(os.path.join(Variables.HACKERMODE_PATH, 'packages.json')) as fp:
+with open(os.path.join(Variables.REAL_TOOL_PATH, 'packages.json')) as fp:
     INSTALL_DATA = json.load(fp)
 
 
@@ -41,7 +41,7 @@ class HackerModeInstaller:
             color = RED if is_base else YELLOW
             print(f'{NORMAL}[{color}{"✗" if is_base else "!"}{NORMAL}] {color}{default_message}{NORMAL}')
 
-    def check(self, show_output=True) -> dict:
+    def check(self, show_output=True, install_message=False) -> dict:
         """this
         function check packages and modules
         and return all packages that not installed.
@@ -72,25 +72,19 @@ class HackerModeInstaller:
                 packages.append(package)
                 self.failed_message(package, show=show_output)
 
+        if show_output and install_message:
+            if os.path.isdir(Variables.TOOL_INSTALL_PATH):
+                if len(package) == 0 and len(modules) == 0:
+                    print(f"# {GREEN}PSHMode installed successfully.{NORMAL}")
+                else:
+                    print(f"# {YELLOW}PSHMode installed successfully but there is some issues.{NORMAL}")
+            else:
+                self.delete(show_message=False)
+                print(f"# {RED}Installed failed!.{NORMAL}")
+
         return {"packages": packages, "modules": modules}
 
     def install(self):
-        # check platforme
-        if not Variables.PLATFORME in ('termux', 'linux'):
-            if Variables.PLATFORME == 'unknown':
-                print("# The tool could not recognize the system!")
-                print("# Do You want to continue anyway?")
-                while True:
-                    if input('# [Y/N]: ').lower() == 'y':
-                        break
-                    else:
-                        print('# good bye :D')
-                        return
-            else:
-                print(f"# The tool does not support {Variables.PLATFORME}")
-                print('# good bye :D')
-                return
-
         # install packages
         need_to_install = self.check(show_output=False)
         for package in need_to_install["packages"]:
@@ -101,27 +95,8 @@ class HackerModeInstaller:
         for module in need_to_install["modules"]:
             os.system(f"pip3 install {module}")
 
-        # move PSHMode to install path
-        if Config.get('actions', 'DEBUG', False):
-            print("# can't move the PSHMode folder ")
-            print("# to install path in debug mode!")
-            return None
-        if os.path.isdir(HACKERMODE_FOLDER_NAME):
-            try:
-                shutil.move(HACKERMODE_FOLDER_NAME, Variables.HACKERMODE_INSTALL_PATH)
-                self.install_tools_packages()
-                Config.set('actions', 'IS_INSTALLED', True)
-                self.check()
-                print(f'# {GREEN}PSHMode installed successfully...{NORMAL}')
-            except shutil.Error as e:
-                self.delete(show_message=False)
-                print(e)
-                print('# installed failed!')
-        else:
-            self.delete(show_message=False)
-            print(f'{RED}# Error: the tool path not found!')
-            print(f'# try to run tool using\n# {GREEN}"python3 PSHMode install"{NORMAL}')
-            print('# installed failed!')
+        # to check
+        self.check(install_message=True)
 
     def update(self):
         if not Config.get('actions', 'DEBUG', cast=bool, default=False):
@@ -129,8 +104,7 @@ class HackerModeInstaller:
             if os.path.exists(hackermode_command_line_path):
                 os.remove(hackermode_command_line_path)
             os.system(
-                f'curl https://raw.githubusercontent.com/Arab-developers/HackerMode/future/install.sh > HackerModeInstall && bash HackerModeInstall')
-            print(f'# {GREEN}PSHMode updated successfully...{NORMAL}')
+                f'curl https://raw.githubusercontent.com/Arab-developers/PSHMode/main/install.sh > PSHMode.install && bash PSHMode.install')
         else:
             print("# can't update in the DEUBG mode!")
 
@@ -139,14 +113,11 @@ class HackerModeInstaller:
         try:
             with open(Variables.BASHRIC_FILE_PATH, "r") as f:
                 data = f.read()
-            if data.find(Variables.HACKERMODE_SHORTCUT.strip()) == -1:
+            if data.find(Variables.TOOL_SHORTCUT.strip()) == -1:
                 with open(Variables.BASHRIC_FILE_PATH, "w") as f:
-                    f.write(data + Variables.HACKERMODE_SHORTCUT)
+                    f.write(data + Variables.TOOL_SHORTCUT)
         except PermissionError:
-            print(NORMAL + "# add PSHMode shortcut:")
-            print(f"# '{YELLOW}{Variables.HACKERMODE_SHORTCUT}{NORMAL}'")
-            print("# to this path:")
-            print("# " + Variables.HACKERMODE_BIN_PATH)
+            print(f"# {RED}can't add the tool shortcut!{NORMAL}")
 
     def delete(self, show_message=True):
         if show_message:
@@ -163,9 +134,9 @@ class HackerModeInstaller:
                 try:
                     with open(Variables.BASHRIC_FILE_PATH, "r") as f:
                         data = f.read()
-                    if data.find(Variables.HACKERMODE_SHORTCUT.strip()) != -1:
+                    if data.find(Variables.TOOL_SHORTCUT.strip()) != -1:
                         with open(Variables.BASHRIC_FILE_PATH, "w") as f:
-                            f.write(data.replace(Variables.HACKERMODE_SHORTCUT, ""))
+                            f.write(data.replace(Variables.TOOL_SHORTCUT, ""))
                 except PermissionError:
                     if show_message:
                         print("# cannot remove PSHMode shortcut!")

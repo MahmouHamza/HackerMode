@@ -2,7 +2,7 @@
 import os
 import sys
 
-HACKERMODE_FOLDER_NAME = "PSHMode"
+TOOL_NAME = "PSHMode"
 
 
 class Variables:
@@ -23,56 +23,29 @@ class Variables:
         return path
 
     @property
-    def HACKERMODE_SHORTCUT(self) -> str:
+    def TOOL_SHORTCUT(self) -> str:
         """PSHMode shortcut"""
-        return """
-function PSHMode() {
-  if [ $1 ]; then
-    if [ $1 == "check" ]; then
-      $HOME/.PSHMode/PSHMode/bin/PSHMode check
-    elif [ $1 == "update" ]; then
-      old_path_update=$(pwd)
-      cd
-      $HOME/.PSHMode/PSHMode/bin/PSHMode update
-      cd $old_path_update
-      unset old_path_update
-    elif [ $1 == "delete" ]; then
-      $HOME/.PSHMode/PSHMode/bin/PSHMode delete
-    else
-      $HOME/.PSHMode/PSHMode/bin/PSHMode --help
-    fi
-  else
-    if [ $VIRTUAL_ENV ]; then
-      echo "PSHMode is running..."
-    else
-      source $HOME/.PSHMode/PSHMode/bin/activate
-    fi
-  fi
-}
-"""
+        with open(os.path.join(self.REAL_TOOL_PATH, "PSHMode.shortcut"), "r") as file:
+            data = file.read()
+        return data
 
     @property
-    def HACKERMODE_ACTIVATE_FILE_PATH(self) -> str:
+    def ACTIVATE_FILE_PATH(self) -> str:
         """To get PSHMode activate file"""
-        return os.path.join(self.HACKERMODE_INSTALL_PATH, "PSHMode/bin/activate")
+        return os.path.join(self.TOOL_INSTALL_PATH, "PSHMode/bin/activate")
 
     @property
-    def HACKERMODE_PATH(self) -> str:
+    def REAL_TOOL_PATH(self) -> str:
         """To get real PSHMode path"""
         return '/'.join(os.path.abspath(__file__).split('/')[:-2])
 
     @property
     def HACKERMODE_BIN_PATH(self) -> str:
         """To get PSHMode [PSHMode/bin/] directory"""
-        return os.path.join(self.HACKERMODE_PATH, "bin")
+        return os.path.join(self.REAL_TOOL_PATH, "bin")
 
     @property
-    def HACKERMODE_TOOLS_PATH(self) -> str:
-        """To get the PSHMode [PSHMode/tools/] path"""
-        return os.path.join(self.HACKERMODE_PATH, "tools")
-
-    @property
-    def HACKERMODE_INSTALL_PATH(self) -> str:
+    def TOOL_INSTALL_PATH(self) -> str:
         """To get the install path [~/.PSHMode/]"""
         ToolPath = os.path.join(os.environ['HOME'], '.PSHMode')
         if not os.path.isdir(ToolPath):
@@ -80,7 +53,7 @@ function PSHMode() {
         return ToolPath
 
     @property
-    def HACKERMODE_CONFIG_PATH(self) -> str:
+    def CONFIG_PATH(self) -> str:
         """To get the config path [~/.config/]"""
         path = os.path.join(os.environ['HOME'], '.config')
         if not os.path.isdir(path):

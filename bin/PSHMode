@@ -6,7 +6,7 @@ from setup import HackerModeInstaller
 
 help_msg = """
 \033[1mUSAGE:\033[0m
-  python3 -B PSHMode/ <command>
+ PSHMode <command>
 
 \033[1mCOMMANDS:\033[0m
  update   update the tool.
