@@ -20,7 +20,7 @@ function download_PSHMode() {
   mv -f PSHMode-main .PSHMode
 }
 
-echo -e "Start Installing for ( \033[1;32m$PLATFORM\033[1;32m )"
+echo -e "Start installing for ( \033[1;32m$PLATFORM\033[0m )"
 
 # Linux installation...
 if [[ "$PLATFORME" -eq "linux" ]]; then
