@@ -183,9 +183,10 @@ class HackerModeInstaller:
                     if RICH_INSTALLED:
                         with console.status(f"[bold green]Installing {dir} packages...") as status:
                             run_setup(root, dir)
+                            console.log(f"# {dir} installed successfully.")
                     else:
-                        run_setup(root, dir)
                         print(f"Installing {dir} packages...")
+                        run_setup(root, dir)
 
 if __name__ == "__main__":
     x = HackerModeInstaller()

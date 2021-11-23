@@ -7,6 +7,9 @@ rm -f PSHMode.install &>/dev/null
 # Get the platform.
 PLATFORM=$(python3 -c "import sys,os;print('win' if sys.platform in ('win32', 'cygwin') else 'macosx' if sys.platform == 'darwin' else 'termux' if os.environ.get('PREFIX') != None else 'linux' if sys.platform.startswith('linux') or sys.platform.startswith('freebsd') else 'unknown')")
 
+# PSHMode logs
+LOG_FILE=".PSHMode-install.log"
+
 # To install before setup the tool.
 PSHMODE_PACKAGES='wget git unzip zip'
 
@@ -14,7 +17,7 @@ PSHMODE_PACKAGES='wget git unzip zip'
 function download_PSHMode() {
   cd $HOME
   rm -f main.zip
-  wget https://github.com/Arab-developers/PSHMode/archive/refs/heads/main.zip
+  wget https://github.com/Arab-developers/PSHMode/archive/refs/heads/main.zip &>> $LOG_FILE
   unzip main.zip &>/dev/null
   rm -f main.zip
   mv -f PSHMode-main .PSHMode
@@ -28,9 +31,9 @@ fi
 if [[ $PLATFORM == "linux" ]]; then
   # Install packages...
   sudo apt update -y
-  sudo apt install $PSHMODE_PACKAGES -y
-  sudo apt install python3 -y
-  sudo apt install python3-pip -y
+  sudo apt install $PSHMODE_PACKAGES -y &>> $LOG_FILE
+  sudo apt install python3 -y &>> $LOG_FILE
+  sudo apt install python3-pip -y &>> $LOG_FILE
 
   # Download the tool.
   download_PSHMode
@@ -41,21 +44,21 @@ if [[ $PLATFORM == "linux" ]]; then
 elif [[ $PLATFORM == "termux" ]]; then
   # Install packages...
   pkg update -y
-  pkg install $PSHMODE_PACKAGES -y
+  pkg install $PSHMODE_PACKAGES -y &>> $LOG_FILE
 
   # Get sdcard permission.
-  ls /sdcard &>/dev/null || termux-setup-storage
+  ls /sdcard &>> $LOG_FILE || termux-setup-storage
 
   # Download the tool.
   download_PSHMode
   python3 -B .PSHMode add_shortcut
-  mkdir /sdcard/PSHMode <&/dev/null
+  mkdir /sdcard/PSHMode &>> $LOG_FILE
   python3 -B .PSHMode install
 
 fi
 
 # Remove variables from the global namespace.
-unset PLATFORM PSHMODE_PACKAGES
+unset PLATFORM PSHMODE_PACKAGES LOG_FILE
 unset -f download_PSHMode
 
 # Add PSHMode command line.
