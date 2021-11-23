@@ -101,7 +101,9 @@ class HackerModeInstaller:
                 if RICH_INSTALLED:
                     with console.status(f"[bold green]Installing {package} ...") as status:
                         os.system(command)
+                        console.log(f"{package} installed successfully.")
                 else:
+                    print(f"Installing {package} ...")
                     os.system(command)
 
         # install modules
@@ -109,7 +111,9 @@ class HackerModeInstaller:
             if RICH_INSTALLED:
                 with console.status(f"[bold green]Installing {module} ...") as status:
                     os.system(f"pip3 install {module}")
+                    console.log(f"{module} installed successfully.")
             else:
+                print(f"Installing {module} ...")
                 os.system(f"pip3 install {module}")
 
         # setup PSHMode tools
@@ -183,7 +187,7 @@ class HackerModeInstaller:
                     if RICH_INSTALLED:
                         with console.status(f"[bold green]Installing {dir} packages...") as status:
                             run_setup(root, dir)
-                            console.log(f"# {dir} installed successfully.")
+                            console.log(f"{dir} installed successfully.")
                     else:
                         print(f"Installing {dir} packages...")
                         run_setup(root, dir)
