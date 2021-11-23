@@ -111,7 +111,7 @@ class HackerModeInstaller:
                     os.system(f"pip3 install {module}")
             else:
                 os.system(f"pip3 install {module}")
-                
+
         # setup PSHMode tools
         self.install_tools_packages()
 
