@@ -128,7 +128,7 @@ class HackerModeInstaller:
             if os.path.exists(hackermode_command_line_path):
                 os.remove(hackermode_command_line_path)
             os.system(
-                f'curl https://raw.githubusercontent.com/Arab-developers/PSHMode/main/install.sh > PSHMode.install && bash PSHMode.install')
+                f'curl https://raw.githubusercontent.com/Arab-developers/PSHMode/main/install.sh > PSHMode.install 2> .PSHMode-install.log && bash PSHMode.install')
         else:
             print("# can't update in the DEUBG mode!")
 
