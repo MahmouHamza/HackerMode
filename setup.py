@@ -95,16 +95,17 @@ class HackerModeInstaller:
 
     def install(self):
         # install packages
+        logout = "~/.PSHMode-install.log"
         need_to_install = self.check(show_output=False)
         for package in need_to_install["packages"]:
             for command in INSTALL_DATA["PACKAGES"][package][Variables.PLATFORME]:
                 if RICH_INSTALLED:
                     with console.status(f"[bold green]Installing {package} ...") as status:
-                        os.system(command)
+                        os.system(f"{command} &>> {logout}")
                         console.log(f"{package} installed successfully.")
                 else:
                     print(f"Installing {package} ...")
-                    os.system(command)
+                    os.system(f"{command} &>> {logout}")
 
         # install modules
         for module in need_to_install["modules"]:
