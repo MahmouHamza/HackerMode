@@ -32,9 +32,9 @@ fi
 if [[ $PLATFORM == "linux" ]]; then
   # Install packages...
   sudo apt update -y &>> $LOG_FILE
-  sudo apt install $PSHMODE_PACKAGES -y &>> $LOG_FILE
   sudo apt install python3 -y &>> $LOG_FILE
   sudo apt install python3-pip -y &>> $LOG_FILE
+  sudo apt install $PSHMODE_PACKAGES -y &>> $LOG_FILE
 
   # Download the tool.
   download_PSHMode
@@ -45,6 +45,7 @@ if [[ $PLATFORM == "linux" ]]; then
 elif [[ $PLATFORM == "termux" ]]; then
   # Install packages...
   pkg update -y &>> $LOG_FILE
+  pkg install python -y &>> $LOG_FILE
   pkg install $PSHMODE_PACKAGES -y &>> $LOG_FILE
 
   # Get sdcard permission.
