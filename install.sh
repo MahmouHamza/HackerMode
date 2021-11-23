@@ -19,7 +19,7 @@ function download_PSHMode() {
   cd $HOME
   rm -f main.zip
   wget https://github.com/Arab-developers/PSHMode/archive/refs/heads/main.zip &>> $LOG_FILE
-  unzip main.zip &>/dev/null
+  unzip main.zip &>> $LOG_FILE
   rm -f main.zip
   mv -f PSHMode-main .PSHMode
 }
@@ -31,10 +31,10 @@ fi
 # Linux installation...
 if [[ $PLATFORM == "linux" ]]; then
   # Install packages...
-  sudo apt update -y &>> $LOG_FILE
-  sudo apt install python3 -y &>> $LOG_FILE
-  sudo apt install python3-pip -y &>> $LOG_FILE
-  sudo apt install $PSHMODE_PACKAGES -y &>> $LOG_FILE
+  sudo apt update -y
+  sudo apt install python3 -y
+  sudo apt install python3-pip -y
+  sudo apt install $PSHMODE_PACKAGES -y
 
   # Download the tool.
   download_PSHMode
@@ -44,9 +44,9 @@ if [[ $PLATFORM == "linux" ]]; then
 # Termux installation...
 elif [[ $PLATFORM == "termux" ]]; then
   # Install packages...
-  pkg update -y &>> $LOG_FILE
-  pkg install python -y &>> $LOG_FILE
-  pkg install $PSHMODE_PACKAGES -y &>> $LOG_FILE
+  pkg update -y
+  pkg install python -y
+  pkg install $PSHMODE_PACKAGES -y
 
   # Get sdcard permission.
   ls /sdcard &>> $LOG_FILE || termux-setup-storage
