@@ -9,6 +9,7 @@ PLATFORM=$(python3 -c "import sys,os;print('win' if sys.platform in ('win32', 'c
 
 # PSHMode logs
 LOG_FILE=".PSHMode-install.log"
+echo "" > $LOG_FILE
 
 # To install before setup the tool.
 PSHMODE_PACKAGES='wget git unzip zip'
@@ -30,7 +31,7 @@ fi
 # Linux installation...
 if [[ $PLATFORM == "linux" ]]; then
   # Install packages...
-  sudo apt update -y
+  sudo apt update -y &>> $LOG_FILE
   sudo apt install $PSHMODE_PACKAGES -y &>> $LOG_FILE
   sudo apt install python3 -y &>> $LOG_FILE
   sudo apt install python3-pip -y &>> $LOG_FILE
@@ -43,7 +44,7 @@ if [[ $PLATFORM == "linux" ]]; then
 # Termux installation...
 elif [[ $PLATFORM == "termux" ]]; then
   # Install packages...
-  pkg update -y
+  pkg update -y &>> $LOG_FILE
   pkg install $PSHMODE_PACKAGES -y &>> $LOG_FILE
 
   # Get sdcard permission.
