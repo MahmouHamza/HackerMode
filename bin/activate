@@ -23,7 +23,7 @@ function exit() {
     unset _OLD_VIRTUAL_PS1
   fi
 
-  source "$VIRTUAL_ENV/etc/onexit.sh"
+  source "$VIRTUAL_ENV/etc/onexit.sh" &> /dev/null
   unset VIRTUAL_ENV tiU apVU
 
   if [ ! "${1:-}" = "nondestructive" ]; then
