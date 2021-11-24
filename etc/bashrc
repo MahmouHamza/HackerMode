@@ -14,7 +14,7 @@ alias cdSD="cd /sdcard"
 alias cdDO="cd /sdcard/Download"
 
 # colors
-if [[ "$0" =~ bash ]]; then
+if [[ "$SHELL" =~ bash ]]; then
   LIGHT_RED="\[\033[1;31m\]"
   BLUE="\[\033[0;34m\]"
   LIGHT_BLUE="\[\033[1;34m\]"
