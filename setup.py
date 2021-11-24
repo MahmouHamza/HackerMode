@@ -1,4 +1,5 @@
 import os
+import subprocess
 import sys
 import json
 import shutil
@@ -6,15 +7,6 @@ import shutil
 sys.path.append(__file__.rsplit("/", 1)[0])
 from lib.config import Config
 from lib.variables import Variables, TOOL_NAME
-
-RICH_INSTALLED = False
-try:
-    from rich.console import Console
-
-    console = Console()
-    RICH_INSTALLED = True
-except ImportError:
-    pass
 
 RED = '\033[1;31m'
 GREEN = '\033[1;32m'
@@ -99,23 +91,13 @@ class HackerModeInstaller:
         need_to_install = self.check(show_output=False)
         for package in need_to_install["packages"]:
             for command in INSTALL_DATA["PACKAGES"][package][Variables.PLATFORME]:
-                if RICH_INSTALLED:
-                    with console.status(f"[bold green]Installing {package} ...") as status:
-                        os.system(f"{command} &>> {logout}")
-                        console.log(f"{package} installed successfully.")
-                else:
-                    print(f"Installing {package} ...")
-                    os.system(f"{command} &>> {logout}")
+                print(f"Installing {package} ...")
+                os.system(f"{command} 2>> {logout}")
 
         # install modules
         for module in need_to_install["modules"]:
-            if RICH_INSTALLED:
-                with console.status(f"[bold green]Installing {module} ...") as status:
-                    os.system(f"pip3 install {module}")
-                    console.log(f"{module} installed successfully.")
-            else:
-                print(f"Installing {module} ...")
-                os.system(f"pip3 install {module}")
+            print(f"Installing {module} ...")
+            os.system(f"pip3 install {module} 2>> {logout}")
 
         # setup PSHMode tools
         self.install_tools_packages()
@@ -185,13 +167,9 @@ class HackerModeInstaller:
         for root, dirs, files in os.walk(Variables.TOOLS_PATH):
             for dir in dirs:
                 if os.path.exists(os.path.join(root, dir, "setup.sh")):
-                    if RICH_INSTALLED:
-                        with console.status(f"[bold green]Installing {dir} packages...") as status:
-                            run_setup(root, dir)
-                            console.log(f"{dir} installed successfully.")
-                    else:
-                        print(f"Installing {dir} packages...")
-                        run_setup(root, dir)
+                    print(f"Installing {dir} packages...")
+                    run_setup(root, dir)
+
 
 if __name__ == "__main__":
     x = HackerModeInstaller()

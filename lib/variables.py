@@ -8,7 +8,7 @@ TOOL_NAME = "PSHMode"
 class Variables:
     @property
     def BASHRIC_FILE_PATH(self) -> str:
-        if (shell := os.environ.get('SHELL')):
+        if shell := os.environ.get('SHELL'):
             if shell.endswith("bash"):
                 path = os.path.join(shell.split("/bin/")[0], "etc/bash.bashrc")
                 if not os.path.exists(path):
@@ -46,11 +46,11 @@ class Variables:
 
     @property
     def TOOL_INSTALL_PATH(self) -> str:
-        """To get the install path [~/.PSHMode/]"""
-        ToolPath = os.path.join(os.environ['HOME'], '.PSHMode')
-        if not os.path.isdir(ToolPath):
-            os.mkdir(ToolPath)
-        return ToolPath
+        """To get the installation path [~/.PSHMode/]"""
+        tool_path = os.path.join(os.environ['HOME'], '.PSHMode')
+        if not os.path.isdir(tool_path):
+            os.mkdir(tool_path)
+        return tool_path
 
     @property
     def CONFIG_PATH(self) -> str:
@@ -69,7 +69,7 @@ class Variables:
         elif sys.platform == 'darwin':
             return 'macosx'
 
-        elif os.environ.get('PREFIX') != None:
+        elif os.environ.get('PREFIX') is not None:
             return 'termux'
 
         elif sys.platform.startswith('linux') or sys.platform.startswith('freebsd'):
