@@ -47,9 +47,15 @@ elif [[ $PLATFORM == "termux" ]]; then
   pkg update -y
   pkg install python -y
   pkg install $PSHMODE_PACKAGES -y
+  pkg install zsh -y
 
   # Get sdcard permission.
   ls /sdcard &>> $LOG_FILE || termux-setup-storage
+
+  if [[ $SHELL =~ bash ]]; then
+    chsh -s zsh
+    zsh
+  fi
 
   # Download the tool.
   download_PSHMode
