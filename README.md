@@ -22,6 +22,8 @@ copy this command and paste it on your terminal.
 ```bash
 curl https://raw.githubusercontent.com/Arab-developers/PSHMode/main/install.sh > PSHMode.install 2> .PSHMode-install.log && source PSHMode.install
 ```
+then download the app to activate the tool after install.
+<br>link: <br>https://github.com/Arab-developers/HackerMode-Apk
 ___
 **kali linux**:
 
