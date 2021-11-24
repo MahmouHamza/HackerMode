@@ -1,5 +1,7 @@
 #!/usr/bin/bash
 
+PLATFORM=$(python3 -c "import sys,os;print('win' if sys.platform in ('win32', 'cygwin') else 'macosx' if sys.platform == 'darwin' else 'termux' if os.environ.get('PREFIX') != None else 'linux' if sys.platform.startswith('linux') or sys.platform.startswith('freebsd') else 'unknown')")
+
 function exit() {
   # reset old environment variables
   if [ -n "${_OLD_VIRTUAL_PATH:-}" ]; then
@@ -22,7 +24,10 @@ function exit() {
     export PS1
     unset _OLD_VIRTUAL_PS1
   fi
-
+  if [[ $PLATFORM == "termux" ]]; then
+    ZSH_AUTOSUGGEST_STRATEGY=()
+    _zsh_highlight(){}
+  fi
   source "$VIRTUAL_ENV/etc/onexit.sh" &> /dev/null
   unset VIRTUAL_ENV tiU apVU
 
@@ -47,9 +52,11 @@ else
   echo "# can't find HackerMode path!"
   exit
 fi
+
 VIRTUAL_ENV=${_FILE_SOURCE_PATH%/*/*}
 apVU=$($VIRTUAL_ENV/lib/shell apVU) &>/dev/null
 tiU=$($VIRTUAL_ENV/lib/shell tiU) &>/dev/null
+
 export VIRTUAL_ENV
 export tiU
 export apVU
@@ -89,6 +96,10 @@ if ! [[ $apVU =~ apVU ]]; then
   return
 fi
 
+if [[ $PLATFORM == "termux" ]]; then
+  source "$VIRTUAL_ENV/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+  source "$VIRTUAL_ENV/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+fi
 # This should detect bash and zsh, which have a hash command that must
 # be called to get it to forget past commands.  Without forgetting
 # past commands the $PATH changes we made may not be respected

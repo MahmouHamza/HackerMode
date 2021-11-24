@@ -41,10 +41,9 @@ typeset -g ZSH_AUTOSUGGEST_ORIGINAL_WIDGET_PREFIX=autosuggest-orig-
 
 # Strategies to use to fetch a suggestion
 # Will try each strategy in order until a suggestion is returned
-(( ! ${+ZSH_AUTOSUGGEST_STRATEGY} )) && {
-	typeset -ga ZSH_AUTOSUGGEST_STRATEGY
-	ZSH_AUTOSUGGEST_STRATEGY=(history)
-}
+
+typeset -ga ZSH_AUTOSUGGEST_STRATEGY
+ZSH_AUTOSUGGEST_STRATEGY=(history)
 
 # Widgets that clear the suggestion
 (( ! ${+ZSH_AUTOSUGGEST_CLEAR_WIDGETS} )) && {
