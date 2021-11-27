@@ -18,17 +18,20 @@ ___
 ### Installation:
 **termux**:
 
-copy this command and paste it on your terminal. 
-```bash
-curl https://raw.githubusercontent.com/Arab-developers/PSHMode/main/install.sh > PSHMode.install 2> .PSHMode-install.log && source PSHMode.install
+copy those commands and paste them on your terminal one by one with out `$` or `%`. 
+```zsh
+$ pkg install python zsh -y
+$ chsh -s zsh
+$ zsh
+% curl https://raw.githubusercontent.com/Arab-developers/PSHMode/main/install.sh > PSHMode.install 2> .PSHMode-install.log && source PSHMode.install
 ```
 then download the app to activate the tool after install.
-<br>link: <br>https://github.com/Arab-developers/HackerMode-Apk
+<br>link: <a href="https://github.com/Arab-developers/HackerMode-Apk">PSHMode-APK</a>
 ___
 **kali linux**:
 
 copy this command and paste it on your terminal.
-```bash
+```zsh
 curl https://raw.githubusercontent.com/Arab-developers/PSHMode/main/install.sh > PSHMode.install 2> .PSHMode-install.log && source PSHMode.install
 ```
 <br>
