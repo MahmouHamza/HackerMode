@@ -6,7 +6,7 @@ echo "" >$LOG_FILE
 PLATFORM=$(python3 -c "import sys, os;print('win' if sys.platform in ('win32', 'cygwin') else 'macosx' if sys.platform == 'darwin' else 'termux' if os.environ.get('PREFIX') != None else 'linux' if sys.platform.startswith('linux') or sys.platform.startswith('freebsd') else 'unknown')")
 
 # Remove old version from the tool.
-python3 -c 'import subprocess;subprocess.run(["bash", "-i", "-c", "HackerMode delete"], stdout=subprocess.PIPE, text=True, input="y")'
+python3 -c 'import subprocess;subprocess.run(["bash", "-i", "-c", "HackerMode delete"], stdout=subprocess.PIPE, text=True, input="y")' &> /dev/null
 rm -rif HackerMode ~/.HackerMode ~/../usr/bin/HackerMode &>/dev/null
 rm -f HackerModeInstall &>/dev/null
 rm -rif PSHMode ~/.PSHMode ~/../usr/bin/PSHMode &>/dev/null
@@ -22,7 +22,7 @@ PSHMODE_PACKAGES=(
 
 # Download PSHMode and move it to home.
 function download_PSHMode() {
-  cd "$HOME" || return
+  cd "$HOME"
   rm -f main.zip
   wget https://github.com/Arab-developers/PSHMode/archive/refs/heads/main.zip &>>$LOG_FILE
   unzip main.zip &>>$LOG_FILE
