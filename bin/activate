@@ -113,7 +113,7 @@ if [[ $PLATFORM == "termux" ]]; then
   unset ZSH_HIGHLIGHT_MAXLENGTH
   source "$VIRTUAL_ENV/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
   source "$VIRTUAL_ENV/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
-  ZSH_AUTOSUGGEST_STRATEGY=(history $(cat $HISTFILE))
+  ZSH_AUTOSUGGEST_STRATEGY=(history)
 fi
 # This should detect bash and zsh, which have a hash command that must
 # be called to get it to forget past commands.  Without forgetting
