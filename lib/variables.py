@@ -9,7 +9,7 @@ class Variables:
     @property
     def BASHRIC_FILE_PATH(self) -> str:
         if self.PLATFORME == "termux":
-            return os.path.join(os.environ.get("PREFIX"), "/etc/zshrc")
+            return os.environ.get("PREFIX") + "/etc/zshrc"
 
         shell = os.environ.get('SHELL')
         if shell.endswith("bash"):
