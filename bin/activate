@@ -24,7 +24,7 @@ function exit() {
     export PS1
     unset _OLD_VIRTUAL_PS1
   fi
-  if [[ $PLATFORM == "termux" && -z $ZSH_VERSION ]]; then
+  if [[ $PLATFORM == "termux" && $ZSH_VERSION != "" ]]; then
     ZSH_AUTOSUGGEST_STRATEGY=()
     ZSH_HIGHLIGHT_MAXLENGTH=0
   fi
@@ -110,8 +110,10 @@ if [[ $PLATFORM == "termux" ]]; then
   # force zsh to show the complete history
   alias history="history 0"
 
+  unset ZSH_HIGHLIGHT_MAXLENGTH
   source "$VIRTUAL_ENV/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
   source "$VIRTUAL_ENV/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+  ZSH_AUTOSUGGEST_STRATEGY=(history $(cat $HISTFILE))
 fi
 # This should detect bash and zsh, which have a hash command that must
 # be called to get it to forget past commands.  Without forgetting
