@@ -24,9 +24,9 @@ function exit() {
     export PS1
     unset _OLD_VIRTUAL_PS1
   fi
-  if [[ $PLATFORM == "termux" ]]; then
+  if [[ $PLATFORM == "termux" && -z $ZSH_VERSION ]]; then
     ZSH_AUTOSUGGEST_STRATEGY=()
-    _zsh_highlight=""
+    ZSH_HIGHLIGHT_MAXLENGTH=0
   fi
   source "$VIRTUAL_ENV/etc/onexit.sh" &> /dev/null
   unset VIRTUAL_ENV tiU apVU
