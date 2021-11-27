@@ -55,7 +55,7 @@ elif [[ $PLATFORM == "termux" ]]; then
   pkg update -y
   pkg install python -y
   for PKG in ${PSHMODE_PACKAGES[*]}; do
-    sudo apt install "$PKG" -y
+    pkg install "$PKG" -y
   done
   pkg install zsh -y
 
