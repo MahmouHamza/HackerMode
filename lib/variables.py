@@ -8,18 +8,16 @@ TOOL_NAME = "PSHMode"
 class Variables:
     @property
     def BASHRIC_FILE_PATH(self) -> str:
-        if shell := os.environ.get('SHELL'):
-            if shell.endswith("bash"):
-                path = os.path.join(shell.split("/bin/")[0], "etc/bash.bashrc")
-                if not os.path.exists(path):
-                    path = "/etc/bash.bashrc"
-            elif shell.endswith("zsh"):
-                path = os.path.join(shell.split("/bin/")[0], "etc/zsh/zshrc")
-                if not os.path.exists(path):
-                    path = "/etc/zsh/zshrc"
-                    if not os.path.exists(path):
-                        path = os.path.join(shell.split("/bin/")[0], "etc/zshrc")
+        if self.PLATFORME == "termux":
+            return os.path.join(os.environ.get("PREFIX"), "/etc/zshrc")
 
+        shell = os.environ.get('SHELL')
+        if shell.endswith("bash"):
+            path = "/etc/bash.bashrc"
+        elif shell.endswith("zsh"):
+            path = "/etc/zsh/zshrc"
+            if not os.path.exists(path):
+                path = "/etc/zshrc"
         return path
 
     @property
