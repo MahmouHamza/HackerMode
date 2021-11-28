@@ -5,6 +5,15 @@ echo "" >$LOG_FILE
 # Get the platform.
 PLATFORM=$(python3 -c "import sys, os;print('win' if sys.platform in ('win32', 'cygwin') else 'macosx' if sys.platform == 'darwin' else 'termux' if os.environ.get('PREFIX') != None else 'linux' if sys.platform.startswith('linux') or sys.platform.startswith('freebsd') else 'unknown')")
 
+# try to install in zsh if user using termux
+if [[ $PLATFORM == "termux" ]]; then
+  if [[ $ZSH_VERSION == "" ]]; then
+    pkg install zsh -y
+    chsh -s zsh
+    zsh --exec $0
+    return
+fi
+
 # Remove old version from the tool.
 python3 -c 'import subprocess;subprocess.run(["bash", "-i", "-c", "HackerMode delete"], stdout=subprocess.PIPE, text=True, input="y")' &> /dev/null
 rm -rif HackerMode ~/.HackerMode ~/../usr/bin/HackerMode &>/dev/null
