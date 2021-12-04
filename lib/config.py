@@ -2,6 +2,7 @@
 import os
 import json
 import shutil
+import sys
 
 try:
     from lib.variables import Variables
@@ -65,13 +66,7 @@ class config(object):
 Config = config()
 
 if __name__ == '__main__':
-    # tests:
-    Config.set_file('file.json')
-    # auto update and save
-    Config.set('settings', 'HOME', '/home/dir')
-    Config.set('settings', 'DEBUG', True)
-    home = Config.get('settings', 'HOME', cast=str)
-    debug = Config.get('settings', 'DEBUG', cast=bool)
-    print(home, type(debug))
-    print(Config.default_file)
-    print(Config.file)
+    try:
+        print(Config.get(sys.argv[1], sys.argv[2]))
+    except KeyError:
+        exit(1)

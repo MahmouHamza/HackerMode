@@ -6,6 +6,8 @@
 
 # shortcuts
 alias c="clear"
+alias l="ls -CF"
+alias la="ls -a"
 alias gc="git clone"
 alias p3i="pip3 install"
 alias p2i="pip2 install"
@@ -30,8 +32,13 @@ else
   LIVE_PATH="%1d"
 fi
 
+PROMPT_USERNAME=$(pshmode-config get PROMPT_TEXT) 2> /dev/null
+if [[ $PROMPT_USERNAME == "" ]]; then
+  PROMPT_USERNAME="PSHMode"
+fi
+
 # PSHMode prompt
-PS1="${BLUE}┌──${LIGHT_BLUE}(${END_BOLD}${LIGHT_RED}PSHMode${LIGHT_BLUE})${END_BOLD}${BLUE}-${LIGHT_BLUE}[${END_BOLD}${END_COLOR}${LIVE_PATH}${LIGHT_BLUE}]${END_BOLD}"$'\n'"${BLUE}└─${LIGHT_RED}\$${END_BOLD}${END_COLOR} "
+PS1="${BLUE}┌──${LIGHT_BLUE}(${END_BOLD}${LIGHT_RED}$PROMPT_USERNAME${LIGHT_BLUE})${END_BOLD}${BLUE}-${LIGHT_BLUE}[${END_BOLD}${END_COLOR}${LIVE_PATH}${LIGHT_BLUE}]${END_BOLD}"$'\n'"${BLUE}└─${LIGHT_RED}\$${END_BOLD}${END_COLOR} "
 # ┌──(PSHMode)-[home]
 # └─$
 

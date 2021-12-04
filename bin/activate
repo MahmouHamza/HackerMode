@@ -72,7 +72,15 @@ if [ -d $VIRTUAL_ENV/tools ]; then
     fi
   done
 fi
+
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/bin" ] ; then
+    PATH="$HOME/bin:$PATH"
+fi
+
 export PATH="$VIRTUAL_ENV/bin:$PATH"
+
+
 
 # prompt setting (PSHMode cmd Style) and intro
 

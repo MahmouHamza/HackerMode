@@ -25,6 +25,8 @@
 
 <section title="SHORTCUTS">
     <line command="c">clear</line>
+    <line command="l">ls -CF</line>
+    <line command="la">ls -a</line>
     <line command="gc">git clone</line>
     <line command="p3i">pip3 install</line>
     <line command="p2i">pip2 install</line>

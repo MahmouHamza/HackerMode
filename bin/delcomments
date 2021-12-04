@@ -5,7 +5,7 @@ for filename in sys.argv[1:]:
     with open(filename, "r") as file:
         data = file.read()
 
-    openc, closec = (r"/*", r"*/")
+    openc, closec = (r'/* "'+filename+'"', r"*/")
     index = 0
     while True:
         index = data.find(openc)
@@ -16,7 +16,9 @@ for filename in sys.argv[1:]:
             text += char
             if text.endswith(closec):
                 break
-        data = data[:data.find(text)] + data[data.find(text) + len(text):]
+        print(text)
+        if not input("replace?: ").strip() == "n":
+            data = data[:data.find(text)] + data[data.find(text) + len(text):]
 
     with open(filename, "w") as file:
         file.write(data)
