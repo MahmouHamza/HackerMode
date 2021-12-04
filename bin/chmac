@@ -6,7 +6,7 @@ import sys
 from optparse import *
 
 
-class MacChanger():
+class MacChanger:
     """ This class is provided to change the mac address for the devices """
 
     def __init__(self):
