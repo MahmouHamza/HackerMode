@@ -6,10 +6,20 @@ from rich.syntax import Syntax
 
 console = Console()
 file = None
+commands = ["-bc", "-l", "-w"]
+errors = 0
 
-for arg in sys.argv:
+for arg in sys.argv[1:]:
     if os.path.isfile(arg):
         file = arg
+    elif arg.startswith("-") and arg not in commands:
+        errors += 1
+    elif file is not None and arg not in commands:
+        errors += 1
+
+if errors or len(sys.argv) < 2:
+    os.system("readme ccat")
+    exit(1)
 
 if file:
     syntax = Syntax.from_path(
@@ -20,4 +30,4 @@ if file:
     )
     console.print(syntax)
 else:
-    os.system("~/.PSHMode/bin/readme ccat")
+    print("# file not found!")
