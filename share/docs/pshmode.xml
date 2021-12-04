@@ -2,7 +2,7 @@
 
 
 <section title="USAGE">
-    <line command="PSHMode">&lt;COMMAND&gt;</line>
+    <line command="">&lt;COMMAND&gt;</line>
 </section>
 
 <section title="COMMANDS">

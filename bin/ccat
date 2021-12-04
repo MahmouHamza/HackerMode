@@ -20,4 +20,4 @@ if file:
     )
     console.print(syntax)
 else:
-    os.system("cd && readme c-cat")
+    os.system("~/.PSHMode/bin/readme ccat")
