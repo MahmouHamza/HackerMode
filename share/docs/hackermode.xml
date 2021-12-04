@@ -2,7 +2,7 @@
 
 
 <section title="USAGE">
-    <line command="$">COMMAND</line>
+    <line command="PSHMode">&lt;COMMAND&gt;</line>
 </section>
 
 <section title="COMMANDS">
@@ -12,7 +12,7 @@
     <line command="lsmap">إظهار الملفات والمجلدات كشجرة</line>
     <line command="findall">للبحث عن الملفات والمجلدات</line>
     <line command="lib-installer">مثبت مكتبات بيثون</line>
-    <line command="view-source">أظهر الكود مع الألوان</line>
+    <line command="c-cat">أظهر الكود مع الألوان</line>
     <line command="pyprivate">تشفير أي ملف بايثون</line>
     <line command="chmac">تغيير عنوان ماك</line>
     <line command="network-info">لإظهار معلومات الشبكة</line>

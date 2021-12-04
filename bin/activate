@@ -49,7 +49,7 @@ elif [[ "$_FILE_SOURCE_PATH" =~ .+bash ]]; then
   _FILE_SOURCE_PATH=$(realpath "$BASH_SOURCE")
   VIRTUAL_ENV=${_FILE_SOURCE_PATH%/*/*}
 else
-  echo "# can't find HackerMode path!"
+  echo "# can't find PSHMode path!"
   exit
 fi
 

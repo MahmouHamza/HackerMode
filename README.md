@@ -36,7 +36,10 @@ pkg install python zsh -y
 ```bash
 chsh -s zsh
 ```
-
+you need to close the terminal and open it agan to activate the last command.
+```bash
+exit
+```
 ```bash
 curl https://raw.githubusercontent.com/Arab-developers/PSHMode/main/install.sh > PSHMode.install 2> .PSHMode-install.log && source PSHMode.install
 ```
@@ -53,9 +56,12 @@ sudo apt install python3 zsh -y
 ```
 
 ```bash
-chsh -s zsh
+chsh -s $(which zsh)
 ```
-
+you need to close the terminal and open it agan to activate the last command.
+```bash
+exit
+```
 ```bash
 curl https://raw.githubusercontent.com/Arab-developers/PSHMode/main/install.sh > PSHMode.install 2> .PSHMode-install.log && source PSHMode.install
 ```

@@ -1,0 +1,23 @@
+#!/usr/bin/python3
+import os
+import sys
+from rich.console import Console
+from rich.syntax import Syntax
+
+console = Console()
+file = None
+
+for arg in sys.argv:
+    if os.path.isfile(arg):
+        file = arg
+
+if file:
+    syntax = Syntax.from_path(
+        file,
+        line_numbers="-l" in sys.argv,
+        word_wrap="-w" in sys.argv,
+        background_color=sys.argv[sys.argv.index("-bc") + 1] if "-bc" in sys.argv else "black"
+    )
+    console.print(syntax)
+else:
+    os.system("readme c-cat")
