@@ -66,6 +66,14 @@ elif [[ $PLATFORM == "termux" ]]; then
   download_PSHMode
   python3 -B .PSHMode add_shortcut
   mkdir /sdcard/PSHMode &>>$LOG_FILE
+
+  # Add the font
+  if ! cmp --silent -- ".PSHMode/share/fonts/DejaVu.ttf" "~/.termux/font.ttf"; then
+    cp .PSHMode/share/fonts/DejaVu.ttf ~/.termux/font.ttf
+    termux-reload-settings
+  fi
+
+  # Start the installation
   python3 -B .PSHMode install
 
 fi
