@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 import sys
 
-for filename in sys.argv[2:]:
+for filename in sys.argv[1:]:
     with open(filename, "r") as file:
         data = file.read()
 
