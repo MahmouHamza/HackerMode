@@ -132,12 +132,9 @@ class HackerModeInstaller:
         else:
             status = "y"
         if status in ("y", "yes", "ok", "yep"):
-            bin_path = os.path.join(os.environ["SHELL"].split("/bin/")[0], "/bin/PSHMode")
             tool_path = os.path.join(os.environ["HOME"], ".PSHMode")
-            if os.path.exists(bin_path):
-                os.remove(bin_path)
+            errors = 0
             if os.path.exists(tool_path):
-                shutil.rmtree(tool_path)
                 try:
                     with open(Variables.BASHRIC_FILE_PATH, "r") as f:
                         data = f.read()
@@ -146,9 +143,19 @@ class HackerModeInstaller:
                             f.write(data.replace(Variables.TOOL_SHORTCUT, ""))
                 except PermissionError:
                     if show_message:
+                        errors += 1
                         print("# cannot remove PSHMode shortcut!")
-            if show_message:
-                print("# The deletion was successful...")
+                try:
+                    shutil.rmtree(tool_path)
+                except Exception as e:
+                    errors += 1
+                    print(e)
+
+            if errors:
+                exit(1)
+            else:
+                if show_message:
+                    print("# The deletion was successful...")
 
     def install_tools_packages(self):
         # compile shell file
